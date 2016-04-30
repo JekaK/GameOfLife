@@ -1,6 +1,8 @@
 package com.gol;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -11,7 +13,7 @@ import java.util.Timer;
  * Created by kruku on 12.04.2016.
  */
 public class GameOfLife extends JFrame {
-    final int width = 200, height = 100;
+    final int width = 100, height = 50;
     boolean[][] currentMove = new boolean[height][width], nextMove = new boolean[height][width];
     boolean play;
     Image offScrImg;
@@ -21,7 +23,28 @@ public class GameOfLife extends JFrame {
     private JButton resetButton;
     private JPanel gamePanel;
     private JButton button1;
+    private JSlider slider1;
+    private int speed = 100;
+    Timer time;
+    TimerTask timer = new TimerTask() {
+        @Override
+        public void run() {
+            if(play){
+                for (int i = 0; i <height ; i++) {
+                    for (int j = 0; j <width ; j++) {
+                        nextMove[i][j] = decide(i,j);
+                    }
+                }
+                for (int i = 0; i <height ; i++) {
+                    for (int j = 0; j <width ; j++) {
+                        currentMove[i][j] = nextMove[i][j];
+                    }
+                }
+                myRepaint();
+            }
 
+        }
+    };
     public GameOfLife() {
         super("GameOfLife");
         setContentPane(mainPanel);
@@ -31,27 +54,24 @@ public class GameOfLife extends JFrame {
         offScrImg = createImage(mainPanel.getWidth(), gamePanel.getHeight());
         offScrGraph = offScrImg.getGraphics();
         myRepaint();
-        Timer time = new Timer();
-        TimerTask timer = new TimerTask() {
+        time = new Timer();
+        time.scheduleAtFixedRate(timer,0,speed);
+        //TODO
+        slider1.setMaximum(1000);
+        slider1.setValue(100);
+        slider1.setMinorTickSpacing(20);
+        slider1.setMajorTickSpacing(100);
+        slider1.setPaintTicks(true);
+        slider1.setPaintLabels(true);
+        slider1.setLabelTable(slider1.createStandardLabels(100));
+        slider1.addChangeListener(new ChangeListener() {
             @Override
-            public void run() {
-                if(play){
-                    for (int i = 0; i <height ; i++) {
-                        for (int j = 0; j <width ; j++) {
-                            nextMove[i][j] = decide(i,j);
-                        }
-                    }
-                    for (int i = 0; i <height ; i++) {
-                        for (int j = 0; j <width ; j++) {
-                            currentMove[i][j] = nextMove[i][j];
-                        }
-                    }
-                    myRepaint();
-                }
-
+            public void stateChanged(ChangeEvent e) {
+                speed = slider1.getValue();
+                reschedule(speed);
+                System.out.println(speed);
             }
-        };
-        time.scheduleAtFixedRate(timer,0,100);
+        });
         gamePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -107,12 +127,35 @@ public class GameOfLife extends JFrame {
         });
     }
 
+    public void reschedule(int delay){
+        time.cancel();
+        timer = new TimerTask() {
+            @Override
+            public void run() {
+                if(play){
+                    for (int i = 0; i <height ; i++) {
+                        for (int j = 0; j <width ; j++) {
+                            nextMove[i][j] = decide(i,j);
+                        }
+                    }
+                    for (int i = 0; i <height ; i++) {
+                        for (int j = 0; j <width ; j++) {
+                            currentMove[i][j] = nextMove[i][j];
+                        }
+                    }
+                    myRepaint();
+                }
+            }
+        };
+        time = new Timer();
+        time.schedule(timer,delay);
 
+    }
 
     public void generateRandom(){
         for (int i = 0; i <height ; i++) {
             for (int j = 0; j <width ; j++) {
-                currentMove[i][j] = Math.random()<0.5;
+                currentMove[i][j] = Math.random()<0.3;
             }
         }
     }
