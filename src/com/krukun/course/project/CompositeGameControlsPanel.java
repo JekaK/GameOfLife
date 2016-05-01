@@ -1,5 +1,6 @@
 package com.krukun.course.project;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Eugeniy Krukun on 30.04.2016.
  */
-public class CompositeGameControlsPanel  implements CompositeInterface{
+public class CompositeGameControlsPanel  implements CompositeInterface {
     private JPanel panel;
     private ArrayList<CompositeInterface> list = new ArrayList<CompositeInterface>();
 

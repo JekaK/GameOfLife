@@ -31,7 +31,6 @@ public class Game {
         controlPanel.add(randomizeButton);
         controlPanel.add(resetButton);
 
-
         mainPanel.add(gamePanel);
         mainPanel.add(controlPanel.goToGame(), BorderLayout.PAGE_END);
 

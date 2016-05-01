@@ -86,7 +86,6 @@ public class GameOfLife extends JFrame {
             public void componentResized(ComponentEvent e) {
                 offScrImg = createImage(mainPanel.getWidth(), gamePanel.getHeight());
                 offScrGraph = offScrImg.getGraphics();
-
                 myRepaint();
             }
         });
@@ -179,6 +178,7 @@ public class GameOfLife extends JFrame {
         if(currentMove[i][j]&&neighbors==2)return true;
         return false;
     }
+
     public void myRepaint() {
         offScrGraph.setColor(gamePanel.getBackground());
         offScrGraph.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
@@ -202,8 +202,5 @@ public class GameOfLife extends JFrame {
             offScrGraph.drawLine(x, 0, x, gamePanel.getHeight());
         }
         gamePanel.getGraphics().drawImage(offScrImg, 0, 0, gamePanel);
-
     }
-
-
 }
