@@ -11,13 +11,12 @@ public class GamePanel extends JPanel implements CompositeInterface {
 
     private Image offScrImg;
     private Graphics offScrGraph;
-    private GameState state;
+
 
     public GamePanel() {
         setLayout(new GridLayout());
         setBackground(Color.GRAY);
         setSize(400, 400);
-        state = new GameState();
         initListeners();
 
     }
@@ -41,27 +40,27 @@ public class GamePanel extends JPanel implements CompositeInterface {
 
     }
 
-    public void myRepaint(Graphics g) {
+    public  void myRepaint(Graphics g) {
         offScrGraph = g;
         offScrGraph.setColor(getBackground());
         offScrGraph.fillRect(0, 0, getWidth(), getHeight());
-        for (int i = 0; i < state.getHeight(); i++) {
-            for (int j = 0; j < state.getWidth(); j++) {
-                if (state.getCurrentMove()[i][j]) {
+        for (int i = 0; i < GameState.height; i++) {
+            for (int j = 0; j <GameState.width; j++) {
+                if (GameState.currentMove[i][j]) {
                     offScrGraph.setColor(Color.YELLOW);
-                    int x = j * getWidth() / state.getWidth();
-                    int y = i * getHeight() / state.getHeight();
-                    offScrGraph.fillRect(x, y, getWidth() / state.getWidth(), getHeight() / state.getHeight());
+                    int x = j * getWidth() / GameState.width;
+                    int y = i * getHeight() / GameState.height;
+                    offScrGraph.fillRect(x, y, getWidth() / GameState.width, getHeight() / GameState.height);
                 }
             }
         }
         offScrGraph.setColor(Color.BLACK);
-        for (int i = 1; i < state.getHeight(); i++) {
-            int y = i * getHeight() / state.getHeight();
+        for (int i = 1; i < GameState.height; i++) {
+            int y = i * getHeight() / GameState.height;
             offScrGraph.drawLine(0, y, getWidth(), y);
         }
-        for (int i = 1; i < state.getWidth(); i++) {
-            int x = i * getWidth() / state.getWidth();
+        for (int i = 1; i < GameState.width; i++) {
+            int x = i * getWidth() /GameState.width;
             offScrGraph.drawLine(x, 0, x, getHeight());
         }
         getGraphics().drawImage(offScrImg, 0, 0, this);
@@ -81,5 +80,4 @@ public class GamePanel extends JPanel implements CompositeInterface {
     public Graphics getOffScrGraph() {
         return offScrGraph;
     }
-
 }

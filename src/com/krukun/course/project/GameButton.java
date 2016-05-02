@@ -14,8 +14,14 @@ public class GameButton  implements CompositeInterface {
         button.setVisible(true);
     }
 
+    public void setText(String name){
+        button.setText(name);
+    }
     @Override
     public JComponent goToGame() {
         return button;
+    }
+    public void addListener(ButtonListener buttonListener){
+        button.addMouseListener(buttonListener.getButtonAdapter(this));
     }
 }

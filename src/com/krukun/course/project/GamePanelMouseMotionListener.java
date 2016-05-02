@@ -8,10 +8,10 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class MyMouseMotionListener implements Listeners{
+public class GamePanelMouseMotionListener implements PanelListener {
     private GameState state;
 
-    public MyMouseMotionListener() {
+    public GamePanelMouseMotionListener() {
         state = new GameState();
     }
 
@@ -20,12 +20,12 @@ public class MyMouseMotionListener implements Listeners{
         return new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                int j = state.getWidth() * e.getX() / panel.getWidth();
-                int i = state.getHeight() * e.getY() / panel.getHeight();
+                int j = GameState.width * e.getX() / panel.getWidth();
+                int i = GameState.height * e.getY() / panel.getHeight();
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    state.getCurrentMove()[i][j] = true;
+                    GameState.currentMove[i][j] = true;
                 } else {
-                    state.getCurrentMove()[i][j] = false;
+                   GameState.currentMove[i][j] = false;
                 }
                 panel.myRepaint(panel.getOffScrGraph());
             }

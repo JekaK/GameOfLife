@@ -1,6 +1,8 @@
 package com.krukun.course.project;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Eugeniy Krukun on 30.04.2016.
@@ -26,6 +28,9 @@ public class Game {
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
+        playButton.addListener(new PlayButtonListener());
+        resetButton.addListener(new ResetButtonListener(gamePanel));
+
         controlPanel = new CompositeGameControlsPanel(1, 3);
         controlPanel.add(playButton);
         controlPanel.add(randomizeButton);
@@ -35,5 +40,6 @@ public class Game {
         mainPanel.add(controlPanel.goToGame(), BorderLayout.PAGE_END);
 
         window.add(mainPanel.goToGame());
+        GameLogic logic = new GameLogic(gamePanel);
     }
 }

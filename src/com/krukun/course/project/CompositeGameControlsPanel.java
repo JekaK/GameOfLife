@@ -17,6 +17,9 @@ public class CompositeGameControlsPanel  implements CompositeInterface {
         panel.setVisible(true);
     }
     public void add(CompositeInterface component){
+        if(component==null){
+            return;
+        }
         list.add(component);
     }
     @Override

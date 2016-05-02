@@ -7,9 +7,9 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class MyComponentListener implements Listeners {
+public class GamePanelComponentListener implements PanelListener {
 
-    public MyComponentListener(GamePanel panel) {
+    public GamePanelComponentListener(GamePanel panel) {
 
     }
 
