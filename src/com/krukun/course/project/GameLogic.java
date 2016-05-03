@@ -17,9 +17,12 @@ public class GameLogic implements Observer {
         this.panel = panel;
         this.state = state;
         state.registerObserver(this);
+
+
+    }
+    public void startThinking(){
         time = new Timer();
         time.scheduleAtFixedRate(timer, 0, 100);
-
     }
 
     Timer time;

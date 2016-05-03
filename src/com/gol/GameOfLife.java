@@ -56,7 +56,6 @@ public class GameOfLife extends JFrame {
         myRepaint();
         time = new Timer();
         time.scheduleAtFixedRate(timer,0,speed);
-        //TODO
         slider1.setMaximum(1000);
         slider1.setValue(100);
         slider1.setMinorTickSpacing(20);

@@ -43,5 +43,6 @@ public class Game {
 
         window.add(mainPanel.goToGame());
         GameLogic logic = new GameLogic(gamePanel,gameState);
+        logic.startThinking();
     }
 }
