@@ -12,15 +12,15 @@ public class ListenerFactory {
         this.panel = panel;
     }
 
-    public EventListener getListenerForPanel(String name){
+    public EventListener getListenerForPanel(String name,GameState state){
         if(name.equals("Component")){
-            return new GamePanelComponentListener(panel).getListener(panel);
+            return new GamePanelComponentListener().getListener(panel);
         }
         if(name.equals("Adapter")){
-            return new GamePanelMouseAdapter().getListener(panel);
+            return new GamePanelMouseAdapter(state).getListener(panel);
         }
         if(name.equals("Motion")){
-            return  new GamePanelMouseMotionListener().getListener(panel);
+            return  new GamePanelMouseMotionListener(state).getListener(panel);
         }
         return null;
     }

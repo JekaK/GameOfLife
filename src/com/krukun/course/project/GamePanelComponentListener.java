@@ -9,7 +9,7 @@ import java.util.EventListener;
  */
 public class GamePanelComponentListener implements PanelListener {
 
-    public GamePanelComponentListener(GamePanel panel) {
+    public GamePanelComponentListener() {
 
     }
 

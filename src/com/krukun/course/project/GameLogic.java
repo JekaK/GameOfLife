@@ -6,52 +6,84 @@ import java.util.TimerTask;
 /**
  * Created by Eugeniy Krukun on 02.05.2016.
  */
-public class GameLogic {
+public class GameLogic implements Observer {
     private GamePanel panel;
+    private GameState state;
+    private boolean play;
+    private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
+    private int count;
 
-    public GameLogic(GamePanel panel) {
+    public GameLogic(GamePanel panel, GameState state) {
         this.panel = panel;
+        this.state = state;
+        state.registerObserver(this);
         time = new Timer();
-        time.scheduleAtFixedRate(timer,0,100);
+        time.scheduleAtFixedRate(timer, 0, 100);
+
     }
 
     Timer time;
     TimerTask timer = new TimerTask() {
         @Override
         public void run() {
-            if( GameState.play){
-                for (int i = 0; i < GameState.height ; i++) {
-                    for (int j = 0; j < GameState.width ; j++) {
-                        GameState.nextMove[i][j] = decide(i,j);
+            if (play) {
+                for (int i = 0; i < GameState.height; i++) {
+                    for (int j = 0; j < GameState.width; j++) {
+                        nextMove[i][j] = decide(i, j);
                     }
                 }
-                for (int i = 0; i < GameState.height ; i++) {
-                    for (int j = 0; j < GameState.width ; j++) {
-                        GameState.currentMove[i][j] =  GameState.nextMove[i][j];
+                for (int i = 0; i < GameState.height; i++) {
+                    for (int j = 0; j < GameState.width; j++) {
+                        currentMove[i][j] = nextMove[i][j];
                     }
                 }
-               panel.myRepaint(panel.getOffScrGraph());
+                panel.myRepaint(panel.getOffScrGraph());
+                state.setData(currentMove,nextMove,play,count);
+
             }
 
         }
     };
-    public boolean decide(int i,int j){
+
+    public boolean decide(int i, int j) {
         int neighbors = 0;
-        if(j>0){
-            if(GameState.currentMove[i][j-1])neighbors++;
-            if(i>0)if(GameState.currentMove[i-1][j-1]) neighbors++;
-            if(i<GameState.height-1)if(GameState.currentMove[i+1][j-1])neighbors++;
+        if (j > 0) {
+            if (currentMove[i][j - 1]) neighbors++;
+            if (i > 0) if (currentMove[i - 1][j - 1]) neighbors++;
+            if (i < GameState.height - 1) if (currentMove[i + 1][j - 1]) neighbors++;
         }
-        if(j<GameState.width-1){
-            if(GameState.currentMove[i][j+1])neighbors++;
-            if(i>0)if(GameState.currentMove[i-1][j+1]) neighbors++;
-            if(i<GameState.height-1)if(GameState.currentMove[i+1][j+1])neighbors++;
+        if (j < GameState.width - 1) {
+            if (currentMove[i][j + 1]) neighbors++;
+            if (i > 0) if (currentMove[i - 1][j + 1]) neighbors++;
+            if (i < GameState.height - 1) if (currentMove[i + 1][j + 1]) neighbors++;
 
         }
-        if(i>0) if(GameState.currentMove[i-1][j])neighbors++;
-        if(i<GameState.height-1) if(GameState.currentMove[i+1][j])neighbors++;
-        if(neighbors==3)return true;
-        if(GameState.currentMove[i][j]&&neighbors==2)return true;
+        if (i > 0) if (currentMove[i - 1][j]) neighbors++;
+        if (i < GameState.height - 1) if (currentMove[i + 1][j]) neighbors++;
+        if (neighbors == 3) return true;
+        if (currentMove[i][j] && neighbors == 2) return true;
         return false;
+    }
+
+    public int countLive() {
+        count = 0;
+        for (int i = 0; i < GameState.height; i++) {
+            for (int j = 0; j < GameState.width; j++) {
+                if (currentMove[i][j] == true) {
+                    count++;
+                }
+            }
+        }
+        state.setData(currentMove,nextMove,play,count);
+        return count;
+    }
+
+
+    @Override
+    public void update(boolean[][] current, boolean[][] next, boolean playState, int count) {
+        this.currentMove = current;
+        this.nextMove = next;
+        this.play = playState;
+        this.count = count;
     }
 }

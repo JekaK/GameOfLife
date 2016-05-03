@@ -20,16 +20,18 @@ public class Game {
     }
 
     public void initUI() {
+        GameState gameState = new GameState();
         window = new GameWindow();
         mainPanel = new BasePanel(new BorderLayout());
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(gameState);
 
         playButton = new GameButton("Play");
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
-        playButton.addListener(new PlayButtonListener());
-        resetButton.addListener(new ResetButtonListener(gamePanel));
+        playButton.addListener(new PlayButtonListener(gameState));
+        resetButton.addListener(new ResetButtonListener(gamePanel,gameState));
+        randomizeButton.addListener(new RandomizeButtonListener(gamePanel,gameState));
 
         controlPanel = new CompositeGameControlsPanel(1, 3);
         controlPanel.add(playButton);
@@ -40,6 +42,6 @@ public class Game {
         mainPanel.add(controlPanel.goToGame(), BorderLayout.PAGE_END);
 
         window.add(mainPanel.goToGame());
-        GameLogic logic = new GameLogic(gamePanel);
+        GameLogic logic = new GameLogic(gamePanel,gameState);
     }
 }
