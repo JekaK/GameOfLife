@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Eugeniy Krukun on 01.05.2016.
  */
 public class GameState implements Observable {
-    private List<Observer> observers;
+    private static List<Observer> observers;
     private boolean play = false;
     public final static int width = 100, height = 50;
     private boolean[][] currentMove = new boolean[height][width], nextMove = new boolean[height][width];
@@ -15,6 +15,9 @@ public class GameState implements Observable {
 
     public GameState() {
         observers = new ArrayList<Observer>();
+    }
+    public GameState(boolean[][] current) {
+        this.currentMove = current;
     }
 
     @Override
@@ -29,16 +32,20 @@ public class GameState implements Observable {
 
     @Override
     public void notifyAllObservers() {
-        for (Observer i:observers){
-            i.update(currentMove,nextMove,play,count);
+        for (Observer i : observers) {
+            i.update(currentMove, nextMove, play, count);
         }
 
     }
-    public void setData(boolean[][] currentMove,boolean[][] nextMove,boolean play,int count){
+
+    public void setData(boolean[][] currentMove, boolean[][] nextMove, boolean play, int count) {
         this.currentMove = currentMove;
         this.nextMove = nextMove;
         this.play = play;
         this.count = count;
         notifyAllObservers();
+    }
+    public boolean[][] getState(){
+        return currentMove;
     }
 }

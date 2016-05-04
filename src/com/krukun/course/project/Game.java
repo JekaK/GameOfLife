@@ -27,7 +27,7 @@ public class Game {
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
-        ButtonListenerFactory factory = new ButtonListenerFactory(gameState,gamePanel);
+        ButtonListenerFactory factory = new ButtonListenerFactory(gameState, gamePanel);
         playButton.addListener(factory.getAdapter("Play"));
         resetButton.addListener(factory.getAdapter("Reset"));
         randomizeButton.addListener(factory.getAdapter("Randomize"));
@@ -41,9 +41,9 @@ public class Game {
         controlPanel.setPlace(BorderLayout.PAGE_END);
         mainPanel.add(controlPanel);
 
-        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20,1,150,3);
+        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20, 1, 150, 3);
         someControlPanel.add(new InfoLabel(" Chose color:"));
-        someControlPanel.add(new ColorsComboBox(new String[]{"Red","Green","Blue"}));
+        someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
         someControlPanel.add(new GameButton("FAQ"));
 
@@ -51,7 +51,16 @@ public class Game {
         mainPanel.add(someControlPanel);
 
         window.add(mainPanel.goToGame());
-        GameLogic logic = new GameLogic(gamePanel,gameState);
+        GameLogic logic = new GameLogic(gamePanel, gameState);
         logic.startThinking();
+
+        /*Originator originator = new Originator();
+        CareTaker careTaker = new CareTaker();
+        originator.setCurrentMove(new boolean[][]{{true,false}});
+        careTaker.add(originator.saveStateToMemento());
+        originator.setCurrentMove(new boolean[][]{{false,true}});
+        careTaker.add(originator.saveStateToMemento());
+        */
+
     }
 }
