@@ -12,6 +12,7 @@ public class GamePanel extends JPanel implements CompositeInterface,Observer {
     private Image offScrImg;
     private Graphics offScrGraph;
     private GameState state;
+    private String place;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width],nextMove = new boolean[GameState.height][GameState.width];
     private int count;
@@ -78,7 +79,7 @@ public class GamePanel extends JPanel implements CompositeInterface,Observer {
     }
 
     public void initListeners() {
-        ListenerFactory factory = new ListenerFactory(this);
+        PanelListenerFactory factory = new PanelListenerFactory(this);
         this.addComponentListener((ComponentListener) factory.getListenerForPanel("Component",state));
         this.addMouseListener((MouseListener) factory.getListenerForPanel("Adapter",state));
         this.addMouseMotionListener((MouseMotionListener) factory.getListenerForPanel("Motion",state));
@@ -93,5 +94,15 @@ public class GamePanel extends JPanel implements CompositeInterface,Observer {
         this.nextMove = next;
         this.play = playState;
         this.count = count;
+    }
+
+    @Override
+    public String getPlace() {
+        return place;
+    }
+
+    @Override
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

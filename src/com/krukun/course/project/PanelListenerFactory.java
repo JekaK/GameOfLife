@@ -5,10 +5,10 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class ListenerFactory {
+public class PanelListenerFactory {
     private GamePanel panel;
 
-    public ListenerFactory(GamePanel panel) {
+    public PanelListenerFactory(GamePanel panel) {
         this.panel = panel;
     }
 

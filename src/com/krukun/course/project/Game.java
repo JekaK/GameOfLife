@@ -1,19 +1,17 @@
 package com.krukun.course.project;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Eugeniy Krukun on 30.04.2016.
  */
 public class Game {
     private GameWindow window;
-    private BasePanel mainPanel;
+    private CompositePanel mainPanel;
     private GamePanel gamePanel;
     private CompositeGameControlsPanel controlPanel;
     private GameButton playButton, randomizeButton, resetButton;
-
 
     public Game() {
         initUI();
@@ -22,16 +20,17 @@ public class Game {
     public void initUI() {
         GameState gameState = new GameState();
         window = new GameWindow();
-        mainPanel = new BasePanel(new BorderLayout());
+        mainPanel = new CompositePanel(new BorderLayout());
         gamePanel = new GamePanel(gameState);
 
         playButton = new GameButton("Play");
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
-        playButton.addListener(new PlayButtonListener(gameState));
-        resetButton.addListener(new ResetButtonListener(gamePanel,gameState));
-        randomizeButton.addListener(new RandomizeButtonListener(gamePanel,gameState));
+        ButtonListenerFactory factory = new ButtonListenerFactory(gameState,gamePanel);
+        playButton.addListener(factory.getAdapter("Play"));
+        resetButton.addListener(factory.getAdapter("Reset"));
+        randomizeButton.addListener(factory.getAdapter("Randomize"));
 
         controlPanel = new CompositeGameControlsPanel(1, 3);
         controlPanel.add(playButton);
@@ -39,7 +38,17 @@ public class Game {
         controlPanel.add(resetButton);
 
         mainPanel.add(gamePanel);
-        mainPanel.add(controlPanel.goToGame(), BorderLayout.PAGE_END);
+        controlPanel.setPlace(BorderLayout.PAGE_END);
+        mainPanel.add(controlPanel);
+
+        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20,1,150,3);
+        someControlPanel.add(new InfoLabel(" Chose color:"));
+        someControlPanel.add(new ColorsComboBox(new String[]{"Red","Green","Blue"}));
+        someControlPanel.add(new InfoLabel(" Chose rules:"));
+        someControlPanel.add(new GameButton("FAQ"));
+
+        someControlPanel.setPlace(BorderLayout.WEST);
+        mainPanel.add(someControlPanel);
 
         window.add(mainPanel.goToGame());
         GameLogic logic = new GameLogic(gamePanel,gameState);

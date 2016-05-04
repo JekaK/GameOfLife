@@ -1,6 +1,5 @@
 package com.krukun.course.project;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.EventListener;

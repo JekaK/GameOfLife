@@ -20,7 +20,7 @@ public class ResetButtonListener implements ButtonListener,Observer {
     }
 
     @Override
-    public MouseAdapter getButtonAdapter(GameButton button) {
+    public MouseAdapter getButtonAdapter() {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

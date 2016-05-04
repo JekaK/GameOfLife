@@ -8,6 +8,7 @@ import javax.swing.*;
  */
 public class GameButton  implements CompositeInterface {
     private JButton button;
+    private String place;
     public GameButton(String name) {
         button = new JButton();
         button.setText(name);
@@ -22,6 +23,16 @@ public class GameButton  implements CompositeInterface {
         return button;
     }
     public void addListener(ButtonListener buttonListener){
-        button.addMouseListener(buttonListener.getButtonAdapter(this));
+        button.addMouseListener(buttonListener.getButtonAdapter());
+    }
+
+    @Override
+    public String getPlace() {
+        return place;
+    }
+
+    @Override
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

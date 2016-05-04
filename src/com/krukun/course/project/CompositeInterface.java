@@ -7,4 +7,6 @@ import javax.swing.*;
  */
 public interface CompositeInterface {
     public JComponent goToGame();
+    public String getPlace();
+    public void setPlace(String place);
 }
