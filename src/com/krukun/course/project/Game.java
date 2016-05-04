@@ -1,6 +1,5 @@
 package com.krukun.course.project;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -18,7 +17,7 @@ public class Game {
     }
 
     public void initUI() {
-        GameState gameState = new GameState();
+        final GameState gameState = new GameState();
         window = new GameWindow();
         mainPanel = new CompositePanel(new BorderLayout());
         gamePanel = new GamePanel(gameState);
@@ -45,6 +44,11 @@ public class Game {
         someControlPanel.add(new InfoLabel(" Chose color:"));
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
+        someControlPanel.add(new GameButton("Next state"));
+        GameButton prev = new GameButton("Prev");
+        //TODO add listener to prev button
+        prev.addListener(new PreviousButtonListener(gamePanel,gameState));
+        someControlPanel.add(prev);
         someControlPanel.add(new GameButton("FAQ"));
 
         someControlPanel.setPlace(BorderLayout.WEST);

@@ -13,14 +13,19 @@ public class GameLogic implements Observer {
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
     private int count;
 
+    private Originator originator;
+    private CareTaker taker;
+
     public GameLogic(GamePanel panel, GameState state) {
         this.panel = panel;
         this.state = state;
+        originator = new Originator();
+        taker = new CareTaker();
+
         state.registerObserver(this);
-
-
     }
-    public void startThinking(){
+
+    public void startThinking() {
         time = new Timer();
         time.scheduleAtFixedRate(timer, 0, 100);
     }
@@ -40,11 +45,10 @@ public class GameLogic implements Observer {
                         currentMove[i][j] = nextMove[i][j];
                     }
                 }
+                originator.setCurrentMove(copy());
+                taker.add(originator.getCurrentMove());
                 panel.myRepaint(panel.getOffScrGraph());
-                state.setData(currentMove,nextMove,play,count);
-
             }
-
         }
     };
 
@@ -77,7 +81,7 @@ public class GameLogic implements Observer {
                 }
             }
         }
-        state.setData(currentMove,nextMove,play,count);
+        state.setData(currentMove, nextMove, play, count);
         return count;
     }
 
@@ -88,5 +92,15 @@ public class GameLogic implements Observer {
         this.nextMove = next;
         this.play = playState;
         this.count = count;
+    }
+
+    private boolean[][] copy() {
+        boolean state[][] = new boolean[GameState.height][GameState.width];
+        for (int i = 0; i < GameState.height; i++) {
+            for (int j = 0; j < GameState.width; j++) {
+                    state[i][j] = currentMove[i][j];
+            }
+        }
+        return state;
     }
 }

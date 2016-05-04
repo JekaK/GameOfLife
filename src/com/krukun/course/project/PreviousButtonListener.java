@@ -1,24 +1,25 @@
 package com.krukun.course.project;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Eugeniy Krukun on 02.05.2016.
+ * Created by Eugeniy Krukun on 04.05.2016.
  */
-public class PlayButtonListener implements ButtonListener, Observer {
+public class PreviousButtonListener implements ButtonListener, Observer {
+    private GamePanel panel;
     private GameState state;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
     private int count;
-    private Originator originator;
     private CareTaker taker;
+    private Originator originator;
 
-    public PlayButtonListener(GameState state) {
+    public PreviousButtonListener(GamePanel panel, GameState state) {
+        this.panel = panel;
         this.state = state;
-        originator = new Originator();
         taker = new CareTaker();
+        originator = new Originator();
         state.registerObserver(this);
     }
 
@@ -27,14 +28,10 @@ public class PlayButtonListener implements ButtonListener, Observer {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                play = !play;
-                JButton button = (JButton) e.getComponent();
-                if (play) {
-                    button.setText("Pause");
-                    originator.setCurrentMove(copy());
-                    taker.add(originator.getCurrentMove());
-                } else button.setText("Play");
+                originator.getStateFromMemento(taker.get(0));
+                currentMove = taker.get(0);
                 state.setData(currentMove, nextMove, play, count);
+                panel.myRepaint(panel.getOffScrGraph());
             }
         };
     }
@@ -45,14 +42,5 @@ public class PlayButtonListener implements ButtonListener, Observer {
         this.nextMove = next;
         this.play = playState;
         this.count = count;
-    }
-    private boolean[][] copy() {
-        boolean state[][] = new boolean[GameState.height][GameState.width];
-        for (int i = 0; i < GameState.height; i++) {
-            for (int j = 0; j < GameState.width; j++) {
-                state[i][j] = currentMove[i][j];
-            }
-        }
-        return state;
     }
 }
