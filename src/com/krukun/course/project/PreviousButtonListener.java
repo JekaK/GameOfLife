@@ -28,10 +28,14 @@ public class PreviousButtonListener implements ButtonListener, Observer {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                originator.getStateFromMemento(taker.get(0));
-                currentMove = taker.get(0);
+
+                if (taker.getCurrent()-2<0) return;
+                originator.getStateFromMemento(taker.get(taker.getCurrent()-2));
+                currentMove = originator.getCurrentMove();
                 state.setData(currentMove, nextMove, play, count);
                 panel.myRepaint(panel.getOffScrGraph());
+                int cur  = taker.getCurrent();
+                taker.setCurrent(--cur);
             }
         };
     }

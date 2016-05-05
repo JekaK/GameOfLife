@@ -27,7 +27,7 @@ public class GameLogic implements Observer {
 
     public void startThinking() {
         time = new Timer();
-        time.scheduleAtFixedRate(timer, 0, 100);
+        time.scheduleAtFixedRate(timer, 0, 1000);
     }
 
     Timer time;
@@ -46,7 +46,8 @@ public class GameLogic implements Observer {
                     }
                 }
                 originator.setCurrentMove(copy());
-                taker.add(originator.getCurrentMove());
+                taker.add(originator.saveToMemento());
+                taker.setCurrent(taker.getListSize());
                 panel.myRepaint(panel.getOffScrGraph());
             }
         }

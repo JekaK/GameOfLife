@@ -14,7 +14,10 @@ public class Originator {
         this.currentMove = currentMove;
     }
 
-    public void getStateFromMemento(boolean [][] state) {
-        this.currentMove = state;
+    public void getStateFromMemento(GameState state) {
+        this.currentMove = state.getState();
+    }
+    public GameState saveToMemento(){
+        return new GameState(currentMove);
     }
 }

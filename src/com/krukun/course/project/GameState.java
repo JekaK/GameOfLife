@@ -16,6 +16,9 @@ public class GameState implements Observable {
     public GameState() {
         observers = new ArrayList<Observer>();
     }
+    public GameState(boolean[][] state){
+        this.currentMove = state;
+    }
 
     @Override
     public void registerObserver(Observer o) {
