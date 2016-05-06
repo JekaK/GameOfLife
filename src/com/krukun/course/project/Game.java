@@ -45,8 +45,9 @@ public class Game {
         someControlPanel.add(new InfoLabel(" Chose color:"));
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
-
-        someControlPanel.add(new GameButton("FAQ"));
+        GameButton faq = new GameButton("FAQ");
+        faq.addListener(new FAQButtonListener());
+        someControlPanel.add(faq);
 
         someControlPanel.setPlace(BorderLayout.WEST);
         mainPanel.add(someControlPanel);
