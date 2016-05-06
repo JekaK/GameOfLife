@@ -13,17 +13,23 @@ public class GamePanel extends JPanel implements CompositeInterface {
     private Graphics offScrGraph;
     private GameState state;
     private String place;
+    public static GamePanel instance;
 
-
-
-    public GamePanel(GameState state) {
+    public static GamePanel getInstance() {
+        if (instance == null) {
+            instance = new GamePanel();
+            instance.setLayout(new GridLayout());
+            instance.setBackground(Color.GRAY);
+        }
+        return instance;
+    }
+    private GamePanel(){}
+    private GamePanel(GameState state) {
         setLayout(new GridLayout());
         setBackground(Color.GRAY);
         setSize(400, 400);
         this.state = state;
-
         initListeners();
-
     }
 
     public Image getOffScrImg() {
@@ -42,8 +48,6 @@ public class GamePanel extends JPanel implements CompositeInterface {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         myRepaint(g);
-
-
     }
 
     public void myRepaint(Graphics g) {
@@ -90,6 +94,14 @@ public class GamePanel extends JPanel implements CompositeInterface {
     }
 
 
+
+    public void setState(GameState state) {
+        this.state = state;
+        initListeners();
+    }
+    public GameState getState(){
+        return state;
+    }
     @Override
     public String getPlace() {
         return place;

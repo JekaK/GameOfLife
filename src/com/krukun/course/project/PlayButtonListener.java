@@ -8,18 +8,18 @@ import java.awt.event.MouseEvent;
  * Created by Eugeniy Krukun on 02.05.2016.
  */
 public class PlayButtonListener implements ButtonListener, Observer {
-    private GameState state;
+    private GamePanel panel;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
     private int count;
     private Originator originator;
     private CareTaker taker;
 
-    public PlayButtonListener(GameState state) {
-        this.state = state;
+    public PlayButtonListener() {
         originator = new Originator();
         taker = new CareTaker();
-        state.registerObserver(this);
+        panel = GamePanel.getInstance();
+        panel.getState().registerObserver(this);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PlayButtonListener implements ButtonListener, Observer {
                     taker.add(originator.saveToMemento());
                     taker.setCurrent(taker.getListSize());
                 } else button.setText("Play");
-                state.setData(currentMove, nextMove, play, count);
+                panel.getState().setData(currentMove, nextMove, play, count);
             }
         };
     }

@@ -6,23 +6,19 @@ import java.awt.event.MouseAdapter;
  * Created by Eugeniy Krukun on 04.05.2016.
  */
 public class ButtonListenerFactory {
-    private GameState state;
-    private GamePanel panel;
 
-    public ButtonListenerFactory(GameState state, GamePanel panel) {
-        this.state = state;
-        this.panel = panel;
+    public ButtonListenerFactory() {
     }
 
     public ButtonListener getAdapter(String name) {
         if (name.equals("Play")) {
-            return new PlayButtonListener(state);
+            return new PlayButtonListener();
         }
         if (name.equals("Reset")) {
-            return new ResetButtonListener(panel, state);
+            return new ResetButtonListener( );
         }
         if (name.equals("Randomize")) {
-            return new RandomizeButtonListener(panel, state);
+            return new RandomizeButtonListener();
         }
         return null;
     }

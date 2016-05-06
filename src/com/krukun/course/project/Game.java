@@ -20,13 +20,14 @@ public class Game {
         final GameState gameState = new GameState();
         window = new GameWindow();
         mainPanel = new CompositePanel(new BorderLayout());
-        gamePanel = new GamePanel(gameState);
+        gamePanel = GamePanel.getInstance();
+        gamePanel.setState(gameState);
 
         playButton = new GameButton("Play");
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
-        ButtonListenerFactory factory = new ButtonListenerFactory(gameState, gamePanel);
+        ButtonListenerFactory factory = new ButtonListenerFactory();
         playButton.addListener(factory.getAdapter("Play"));
         resetButton.addListener(factory.getAdapter("Reset"));
         randomizeButton.addListener(factory.getAdapter("Randomize"));
@@ -45,11 +46,11 @@ public class Game {
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
         GameButton next = new GameButton("Next");
-        next.addListener(new NextButtonListener(gamePanel,gameState));
+        next.addListener(new NextButtonListener());
 
         someControlPanel.add(next);
         GameButton prev = new GameButton("Prev");
-        prev.addListener(new PreviousButtonListener(gamePanel,gameState));
+        prev.addListener(new PreviousButtonListener());
 
 
         someControlPanel.add(prev);
@@ -59,7 +60,7 @@ public class Game {
         mainPanel.add(someControlPanel);
 
         window.add(mainPanel.goToGame());
-        GameLogic logic = new GameLogic(gamePanel, gameState);
+        GameLogic logic = new GameLogic( gameState);
         logic.startThinking();
 
     }

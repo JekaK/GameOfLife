@@ -8,19 +8,17 @@ import java.awt.event.MouseEvent;
  */
 public class NextButtonListener implements  ButtonListener,Observer {
     private GamePanel panel;
-    private GameState state;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
     private int count;
     private CareTaker taker;
     private Originator originator;
 
-    public NextButtonListener(GamePanel panel, GameState state) {
-        this.panel = panel;
-        this.state = state;
+    public NextButtonListener() {
+        this.panel = GamePanel.getInstance();
         taker = new CareTaker();
         originator = new Originator();
-        state.registerObserver(this);
+        panel.getState().registerObserver(this);
     }
 
     @Override
@@ -31,7 +29,7 @@ public class NextButtonListener implements  ButtonListener,Observer {
                 if(taker.getCurrent()<taker.getListSize()-1){
                     originator.getStateFromMemento(taker.get(taker.getCurrent()+1));
                     currentMove = originator.getCurrentMove();
-                    state.setData(currentMove, nextMove, play, count);
+                    panel.getState().setData(currentMove, nextMove, play, count);
                     panel.myRepaint(panel.getOffScrGraph());
                     int cur  = taker.getCurrent();
                     taker.setCurrent(++cur);

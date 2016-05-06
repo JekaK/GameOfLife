@@ -16,12 +16,11 @@ public class GameLogic implements Observer {
     private Originator originator;
     private CareTaker taker;
 
-    public GameLogic(GamePanel panel, GameState state) {
-        this.panel = panel;
+    public GameLogic( GameState state) {
+        this.panel = GamePanel.getInstance();
         this.state = state;
         originator = new Originator();
         taker = new CareTaker();
-
         state.registerObserver(this);
     }
 
@@ -40,12 +39,13 @@ public class GameLogic implements Observer {
                         nextMove[i][j] = decide(i, j);
                     }
                 }
+                boolean mod = isModified();
                 for (int i = 0; i < GameState.height; i++) {
                     for (int j = 0; j < GameState.width; j++) {
                         currentMove[i][j] = nextMove[i][j];
                     }
                 }
-                if(isHaveAlive()) {
+                if (isHaveAlive() && mod) {
                     originator.setCurrentMove(copy());
                     taker.add(originator.saveToMemento());
                     taker.setCurrent(taker.getListSize());
@@ -96,10 +96,11 @@ public class GameLogic implements Observer {
         this.play = playState;
         this.count = count;
     }
-    public boolean isHaveAlive(){
-        for (int i = 0; i <GameState.height ; i++) {
-            for (int j = 0; j <GameState.width ; j++) {
-                if(currentMove[i][j]){
+
+    private boolean isHaveAlive() {
+        for (int i = 0; i < GameState.height; i++) {
+            for (int j = 0; j < GameState.width; j++) {
+                if (currentMove[i][j]) {
                     return true;
                 }
             }
@@ -107,11 +108,26 @@ public class GameLogic implements Observer {
         return false;
     }
 
+    private boolean isModified() {
+        int count = 0;
+        for (int i = 0; i < GameState.height; i++) {
+            for (int j = 0; j < GameState.width; j++) {
+                if (currentMove[i][j] == nextMove[i][j]) {
+                    count++;
+                }
+            }
+        }
+        if (count == (GameState.height * GameState.width)) {
+            return false;
+        }
+        return true;
+    }
+
     private boolean[][] copy() {
         boolean state[][] = new boolean[GameState.height][GameState.width];
         for (int i = 0; i < GameState.height; i++) {
             for (int j = 0; j < GameState.width; j++) {
-                    state[i][j] = currentMove[i][j];
+                state[i][j] = currentMove[i][j];
             }
         }
         return state;

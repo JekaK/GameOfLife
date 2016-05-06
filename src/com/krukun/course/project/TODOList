@@ -1,9 +1,11 @@
 Add Decorator pattern to UI
 Add State pattern to load decoration for UI
-Add Memento pattern for save state of game
+
 
 Now have
 1.Facade
 2.Composite
 3.Factory
 4.Observer
+5.Memento
+6.Singleton
