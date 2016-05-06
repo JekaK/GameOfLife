@@ -26,7 +26,7 @@ public class GameLogic implements Observer {
 
     public void startThinking() {
         time = new Timer();
-        time.scheduleAtFixedRate(timer, 0, 100);
+        time.scheduleAtFixedRate(timer, 0, 1000);
     }
 
     Timer time;

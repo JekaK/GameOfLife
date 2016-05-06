@@ -13,6 +13,7 @@ public class GameButton  implements CompositeInterface {
         button = new JButton();
         button.setText(name);
         button.setVisible(true);
+        button.setFocusable(false);
     }
 
     public void setText(String name){

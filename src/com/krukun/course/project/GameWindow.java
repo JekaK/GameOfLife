@@ -16,6 +16,7 @@ public class GameWindow extends JFrame {
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setVisible(true);
+        setFocusable(true);
+        requestFocusInWindow();
     }
-
 }

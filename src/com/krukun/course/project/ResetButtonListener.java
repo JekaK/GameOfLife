@@ -2,6 +2,7 @@ package com.krukun.course.project;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 
 /**
  * Created by Eugeniy Krukun on 02.05.2016.

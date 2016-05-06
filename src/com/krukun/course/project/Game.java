@@ -45,22 +45,15 @@ public class Game {
         someControlPanel.add(new InfoLabel(" Chose color:"));
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
-        GameButton next = new GameButton("Next");
-        next.addListener(new NextButtonListener());
 
-        someControlPanel.add(next);
-        GameButton prev = new GameButton("Prev");
-        prev.addListener(new PreviousButtonListener());
-
-
-        someControlPanel.add(prev);
         someControlPanel.add(new GameButton("FAQ"));
 
         someControlPanel.setPlace(BorderLayout.WEST);
         mainPanel.add(someControlPanel);
 
         window.add(mainPanel.goToGame());
-        GameLogic logic = new GameLogic( gameState);
+        window.addKeyListener(new MementoListener());
+        GameLogic logic = new GameLogic(gameState);
         logic.startThinking();
 
     }

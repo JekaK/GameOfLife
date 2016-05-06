@@ -20,17 +20,12 @@ public class GamePanel extends JPanel implements CompositeInterface {
             instance = new GamePanel();
             instance.setLayout(new GridLayout());
             instance.setBackground(Color.GRAY);
+            instance.setFocusable(true);
+            instance.requestFocusInWindow();
         }
         return instance;
     }
     private GamePanel(){}
-    private GamePanel(GameState state) {
-        setLayout(new GridLayout());
-        setBackground(Color.GRAY);
-        setSize(400, 400);
-        this.state = state;
-        initListeners();
-    }
 
     public Image getOffScrImg() {
         return offScrImg;
