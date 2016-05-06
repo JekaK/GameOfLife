@@ -27,7 +27,7 @@ public class GameLogic implements Observer {
 
     public void startThinking() {
         time = new Timer();
-        time.scheduleAtFixedRate(timer, 0, 1000);
+        time.scheduleAtFixedRate(timer, 0, 100);
     }
 
     Timer time;
@@ -45,9 +45,11 @@ public class GameLogic implements Observer {
                         currentMove[i][j] = nextMove[i][j];
                     }
                 }
-                originator.setCurrentMove(copy());
-                taker.add(originator.saveToMemento());
-                taker.setCurrent(taker.getListSize());
+                if(isHaveAlive()) {
+                    originator.setCurrentMove(copy());
+                    taker.add(originator.saveToMemento());
+                    taker.setCurrent(taker.getListSize());
+                }
                 panel.myRepaint(panel.getOffScrGraph());
             }
         }
@@ -93,6 +95,16 @@ public class GameLogic implements Observer {
         this.nextMove = next;
         this.play = playState;
         this.count = count;
+    }
+    public boolean isHaveAlive(){
+        for (int i = 0; i <GameState.height ; i++) {
+            for (int j = 0; j <GameState.width ; j++) {
+                if(currentMove[i][j]){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean[][] copy() {

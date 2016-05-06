@@ -44,10 +44,14 @@ public class Game {
         someControlPanel.add(new InfoLabel(" Chose color:"));
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
         someControlPanel.add(new InfoLabel(" Chose rules:"));
-        someControlPanel.add(new GameButton("Next state"));
+        GameButton next = new GameButton("Next");
+        next.addListener(new NextButtonListener(gamePanel,gameState));
+
+        someControlPanel.add(next);
         GameButton prev = new GameButton("Prev");
-        //TODO add listener to prev button
         prev.addListener(new PreviousButtonListener(gamePanel,gameState));
+
+
         someControlPanel.add(prev);
         someControlPanel.add(new GameButton("FAQ"));
 
@@ -57,14 +61,6 @@ public class Game {
         window.add(mainPanel.goToGame());
         GameLogic logic = new GameLogic(gamePanel, gameState);
         logic.startThinking();
-
-        /*Originator originator = new Originator();
-        CareTaker careTaker = new CareTaker();
-        originator.setCurrentMove(new boolean[][]{{true,false}});
-        careTaker.add(originator.saveStateToMemento());
-        originator.setCurrentMove(new boolean[][]{{false,true}});
-        careTaker.add(originator.saveStateToMemento());
-        */
 
     }
 }
