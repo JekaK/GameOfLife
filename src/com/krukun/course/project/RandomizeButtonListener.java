@@ -3,6 +3,7 @@ package com.krukun.course.project;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by Eugeniy Krukun on 03.05.2016.
@@ -18,7 +19,7 @@ public class RandomizeButtonListener implements ButtonListener,Observer {
         this.panel.getState().registerObserver(this);
     }
     @Override
-    public MouseAdapter getButtonAdapter() {
+    public MouseListener getButtonAdapter() {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

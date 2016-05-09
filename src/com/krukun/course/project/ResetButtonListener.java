@@ -2,6 +2,7 @@ package com.krukun.course.project;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 
 /**
@@ -19,7 +20,7 @@ public class ResetButtonListener implements ButtonListener,Observer {
     }
 
     @Override
-    public MouseAdapter getButtonAdapter() {
+    public MouseListener getButtonAdapter() {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

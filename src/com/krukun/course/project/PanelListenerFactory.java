@@ -6,21 +6,20 @@ import java.util.EventListener;
  * Created by Eugeniy Krukun on 01.05.2016.
  */
 public class PanelListenerFactory {
-    private GamePanel panel;
 
-    public PanelListenerFactory(GamePanel panel) {
-        this.panel = panel;
+    public PanelListenerFactory() {
+
     }
 
     public EventListener getListenerForPanel(String name,GameState state){
         if(name.equals("Component")){
-            return new GamePanelComponentListener().getListener(panel);
+            return new GamePanelComponentListener().getListener();
         }
         if(name.equals("Adapter")){
-            return new GamePanelMouseAdapter(state).getListener(panel);
+            return new GamePanelMouseAdapter().getListener();
         }
         if(name.equals("Motion")){
-            return  new GamePanelMouseMotionListener(state).getListener(panel);
+            return  new GamePanelMouseMotionListener().getListener();
         }
         return null;
     }

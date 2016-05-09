@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements CompositeInterface {
     }
 
     public void initListeners() {
-        PanelListenerFactory factory = new PanelListenerFactory(this);
+        PanelListenerFactory factory = new PanelListenerFactory();
         this.addComponentListener((ComponentListener) factory.getListenerForPanel("Component", state));
         this.addMouseListener((MouseListener) factory.getListenerForPanel("Adapter", state));
         this.addMouseMotionListener((MouseMotionListener) factory.getListenerForPanel("Motion", state));

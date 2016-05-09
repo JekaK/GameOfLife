@@ -8,13 +8,13 @@ import java.util.EventListener;
  * Created by Eugeniy Krukun on 01.05.2016.
  */
 public class GamePanelComponentListener implements PanelListener {
-
+    private GamePanel panel;
     public GamePanelComponentListener() {
-
+        panel = GamePanel.getInstance();
     }
 
     @Override
-    public EventListener getListener(final GamePanel panel) {
+    public EventListener getListener() {
 
         return new ComponentListener() {
             @Override

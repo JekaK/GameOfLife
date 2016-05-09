@@ -1,6 +1,11 @@
 package com.krukun.course.project;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Created by Eugeniy Krukun on 30.04.2016.
@@ -41,9 +46,15 @@ public class Game {
         controlPanel.setPlace(BorderLayout.PAGE_END);
         mainPanel.add(controlPanel);
 
-        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20, 1, 150, 3);
+        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20, 1, 150, 10);
         someControlPanel.add(new InfoLabel(" Chose color:"));
         someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
+
+        GameButton label = new GameButton("Glider");
+        label.goToGame().addMouseListener(new DragAdapter().getButtonAdapter());
+
+
+        someControlPanel.add(label);
         someControlPanel.add(new InfoLabel(" Chose rules:"));
         GameButton faq = new GameButton("FAQ");
         faq.addListener(new FAQButtonListener());
@@ -58,4 +69,5 @@ public class Game {
         logic.startThinking();
 
     }
+
 }

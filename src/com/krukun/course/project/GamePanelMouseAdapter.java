@@ -9,26 +9,26 @@ import java.util.EventListener;
  */
 public class GamePanelMouseAdapter implements PanelListener,Observer {
 
-    private GameState state;
+    private GamePanel panel;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width],nextMove = new boolean[GameState.height][GameState.width];
     private int count;
 
-    public GamePanelMouseAdapter(GameState state) {
-        this.state = state;
-        state.registerObserver(this);
+    public GamePanelMouseAdapter() {
+        panel = GamePanel.getInstance();
+        panel.getState().registerObserver(this);
     }
 
     @Override
-    public EventListener getListener(final GamePanel panel) {
+    public EventListener getListener() {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int j = GameState.width * e.getX() / panel.getWidth();
                 int i = GameState.height * e.getY() / panel.getHeight();
                 currentMove[i][j] = !currentMove[i][j];
+                panel.getState().setData(currentMove, nextMove, play, count);
                 panel.myRepaint(panel.getOffScrGraph());
-                state.setData(currentMove,nextMove,play,count);
             }
         };
     }
