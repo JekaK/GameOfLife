@@ -17,7 +17,10 @@ public class DragAdapter implements Observer {
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];
     private int count;
 
+
+
     public DragAdapter() {
+
         this.panel = GamePanel.getInstance();
         this.panel.getState().registerObserver(this);
     }
@@ -25,6 +28,8 @@ public class DragAdapter implements Observer {
 
     public MouseListener getButtonAdapter() {
         return new MouseAdapter() {
+
+
             @Override
             public void mousePressed(MouseEvent e) {
                 pressed = e;
@@ -32,23 +37,26 @@ public class DragAdapter implements Observer {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                Component component = e.getComponent();
-                location = component.getLocation(location);
 
+                    Component component = e.getComponent();
+                    location = component.getLocation(location);
 
-                int x = location.x - (pressed.getComponent().getWidth()/2) + e.getX();
-                int y = location.y - (pressed.getComponent().getHeight()/2) + e.getY();
+                    int x = location.x - (pressed.getComponent().getWidth() / 2) + e.getX();
+                    int y = location.y - (pressed.getComponent().getHeight() / 2) + e.getY();
 
-                int j = (GameState.width * (x-((pressed.getComponent().getWidth()/2))) / panel.getWidth())+2;
-                int i = (GameState.height * (y-(pressed.getComponent().getHeight()/2)) / panel.getHeight())+2;
+                    int j = (GameState.width * (x - ((pressed.getComponent().getWidth() / 2))) / panel.getWidth()) + 2;
+                    int i = (GameState.height * (y - (pressed.getComponent().getHeight() / 2)) / panel.getHeight()) + 2;
+                    if(i>=0&&j>=0) {
+                        currentMove[i][j] = true;
+                        currentMove[i][--j] = true;
+                        currentMove[i][--j] = true;
+                        currentMove[++i][j] = true;
+                        currentMove[++i][++j] = true;
+                        panel.getState().setData(currentMove, nextMove, play, count);
+                        panel.myRepaint(panel.getOffScrGraph());
+                    }
+                    pressed = null;
 
-                currentMove[i][j] = true;
-                currentMove[i][--j] = true;
-                currentMove[i][--j] = true;
-                currentMove[++i][j] = true;
-                currentMove[++i][++j] = true;
-                panel.getState().setData(currentMove, nextMove, play, count);
-                panel.myRepaint(panel.getOffScrGraph());
             }
         };
     }

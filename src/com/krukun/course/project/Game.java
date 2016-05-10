@@ -46,16 +46,15 @@ public class Game {
         controlPanel.setPlace(BorderLayout.PAGE_END);
         mainPanel.add(controlPanel);
 
-        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(20, 1, 150, 10);
-        someControlPanel.add(new InfoLabel(" Chose color:"));
-        someControlPanel.add(new ColorsComboBox(new String[]{"Red", "Green", "Blue"}));
+        CompositeGameControlsPanel someControlPanel = new CompositeGameControlsPanel(17, 1,150,10);
+        someControlPanel.add(new InfoLabel("Gliders: "));
+        InfoLabel label = new InfoLabel();
 
-        GameButton label = new GameButton("Glider");
+        label.setIcon(new ImageIcon("D:\\Development\\Patterns\\CourseProject\\src\\com\\krukun\\course\\project\\LIFE2.GIF"));
+        label.setPlace(BorderLayout.CENTER);
         label.goToGame().addMouseListener(new DragAdapter().getButtonAdapter());
 
-
         someControlPanel.add(label);
-        someControlPanel.add(new InfoLabel(" Chose rules:"));
         GameButton faq = new GameButton("FAQ");
         faq.addListener(new FAQButtonListener());
         someControlPanel.add(faq);

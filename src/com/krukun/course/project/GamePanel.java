@@ -15,7 +15,6 @@ public class GamePanel extends JPanel implements CompositeInterface {
     private String place;
     public static GamePanel instance;
 
-
     public static GamePanel getInstance() {
         if (instance == null) {
             instance = new GamePanel();

@@ -27,13 +27,15 @@ public class GamePanelMouseMotionListener implements PanelListener, Observer {
             public void mouseDragged(MouseEvent e) {
                 int j = GameState.width * e.getX() / panel.getWidth();
                 int i = GameState.height * e.getY() / panel.getHeight();
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    currentMove[i][j] = true;
-                } else {
-                    currentMove[i][j] = false;
+                if(i>=0&&j>=0&&i<GameState.height&&j<GameState.width) {
+                    if (SwingUtilities.isLeftMouseButton(e)) {
+                        currentMove[i][j] = true;
+                    } else {
+                        currentMove[i][j] = false;
+                    }
+                    panel.getState().setData(currentMove, nextMove, play, count);
+                    panel.myRepaint(panel.getOffScrGraph());
                 }
-                panel.getState().setData(currentMove, nextMove,play,count);
-                panel.myRepaint(panel.getOffScrGraph());
             }
         };
     }
