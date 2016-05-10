@@ -15,6 +15,7 @@ public class GamePanel extends JPanel implements CompositeInterface {
     private String place;
     public static GamePanel instance;
 
+
     public static GamePanel getInstance() {
         if (instance == null) {
             instance = new GamePanel();
@@ -25,7 +26,10 @@ public class GamePanel extends JPanel implements CompositeInterface {
         }
         return instance;
     }
-    private GamePanel(){}
+
+    private GamePanel() {
+
+    }
 
     public Image getOffScrImg() {
         return offScrImg;
@@ -89,14 +93,15 @@ public class GamePanel extends JPanel implements CompositeInterface {
     }
 
 
-
     public void setState(GameState state) {
         this.state = state;
         initListeners();
     }
-    public GameState getState(){
+
+    public GameState getState() {
         return state;
     }
+
     @Override
     public String getPlace() {
         return place;

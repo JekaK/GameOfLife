@@ -32,10 +32,11 @@ public class PlayButtonListener implements ButtonListener, Observer {
                 JButton button = (JButton) e.getComponent();
                 if (play) {
                     button.setText("Pause");
-                    originator.setCurrentMove(copy());
-                    taker.add(originator.saveToMemento());
-                    taker.setCurrent(taker.getListSize());
                 } else button.setText("Play");
+                
+                originator.setCurrentMove(copy());
+                taker.add(originator.saveToMemento());
+                taker.setCurrent(taker.getListSize());
                 panel.getState().setData(currentMove, nextMove, play, count);
             }
         };

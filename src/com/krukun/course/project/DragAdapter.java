@@ -24,12 +24,7 @@ public class DragAdapter implements Observer {
 
 
     public MouseListener getButtonAdapter() {
-        return new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
+        return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 pressed = e;
@@ -54,17 +49,6 @@ public class DragAdapter implements Observer {
                 currentMove[++i][++j] = true;
                 panel.getState().setData(currentMove, nextMove, play, count);
                 panel.myRepaint(panel.getOffScrGraph());
-                System.out.println("released");
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
             }
         };
     }

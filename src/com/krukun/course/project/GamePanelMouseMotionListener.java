@@ -2,6 +2,7 @@ package com.krukun.course.project;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.EventListener;
 
@@ -21,7 +22,7 @@ public class GamePanelMouseMotionListener implements PanelListener, Observer {
 
     @Override
     public EventListener getListener() {
-        return new MouseMotionListener() {
+        return new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 int j = GameState.width * e.getX() / panel.getWidth();
@@ -33,11 +34,6 @@ public class GamePanelMouseMotionListener implements PanelListener, Observer {
                 }
                 panel.getState().setData(currentMove, nextMove,play,count);
                 panel.myRepaint(panel.getOffScrGraph());
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-
             }
         };
     }
