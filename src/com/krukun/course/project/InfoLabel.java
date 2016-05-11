@@ -30,6 +30,7 @@ public class InfoLabel implements CompositeInterface {
         Border border = LineBorder.createGrayLineBorder();
         label.setBorder(border);
     }
+
     @Override
     public String getPlace() {
         return place;

@@ -9,13 +9,23 @@ import javax.swing.*;
 public class GameButton  implements CompositeInterface {
     private JButton button;
     private String place;
+
+    public GameButton() {
+        button = new JButton();
+        button.setVisible(true);
+        button.setFocusable(false);
+    }
+
     public GameButton(String name) {
         button = new JButton();
         button.setText(name);
         button.setVisible(true);
         button.setFocusable(false);
     }
-
+    public void setIcon(ImageIcon icon){
+        button.setIcon(icon);
+        button.setSize(icon.getIconWidth(),icon.getIconHeight());
+    }
     public void setText(String name){
         button.setText(name);
     }
