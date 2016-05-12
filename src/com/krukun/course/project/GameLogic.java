@@ -75,20 +75,6 @@ public class GameLogic implements Observer {
         return false;
     }
 
-    public int countLive() {
-        count = 0;
-        for (int i = 0; i < GameState.height; i++) {
-            for (int j = 0; j < GameState.width; j++) {
-                if (currentMove[i][j] == true) {
-                    count++;
-                }
-            }
-        }
-        state.setData(currentMove, nextMove, play, count);
-        return count;
-    }
-
-
     @Override
     public void update(boolean[][] current, boolean[][] next, boolean playState, int count) {
         this.currentMove = current;

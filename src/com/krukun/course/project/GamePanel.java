@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements CompositeInterface {
         if (instance == null) {
             instance = new GamePanel();
             instance.setLayout(new GridLayout());
-            instance.setBackground(Color.GRAY);
+            instance.setBackground(Color.BLACK);
             instance.setFocusable(true);
             instance.requestFocusInWindow();
         }
@@ -55,14 +55,14 @@ public class GamePanel extends JPanel implements CompositeInterface {
         for (int i = 0; i < GameState.height; i++) {
             for (int j = 0; j < GameState.width; j++) {
                 if (state.getState()[i][j]) {
-                    offScrGraph.setColor(Color.YELLOW);
+                    offScrGraph.setColor(Color.WHITE);
                     int x = j * getWidth() / GameState.width;
                     int y = i * getHeight() / GameState.height;
                     offScrGraph.fillRect(x, y, getWidth() / GameState.width, getHeight() / GameState.height);
                 }
             }
         }
-        offScrGraph.setColor(Color.BLACK);
+        offScrGraph.setColor(Color.GRAY);
         for (int i = 1; i < GameState.height; i++) {
             int y = i * getHeight() / GameState.height;
             offScrGraph.drawLine(0, y, getWidth(), y);

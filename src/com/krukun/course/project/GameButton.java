@@ -26,9 +26,6 @@ public class GameButton  implements CompositeInterface {
         button.setIcon(icon);
         button.setSize(icon.getIconWidth(),icon.getIconHeight());
     }
-    public void setText(String name){
-        button.setText(name);
-    }
     @Override
     public JComponent goToGame() {
         return button;

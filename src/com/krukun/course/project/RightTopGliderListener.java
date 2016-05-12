@@ -40,7 +40,7 @@ public class RightTopGliderListener implements ButtonListener,Observer {
 
                 int j = (GameState.width * (x - ((pressed.getComponent().getWidth() / 2))) / panel.getWidth())-1;
                 int i = (GameState.height * (y - (pressed.getComponent().getHeight() / 2)) / panel.getHeight()) + 3;
-                if(i>=0&&j>=0&&i+2<GameState.height&&j>0){
+                if(i>=0&&j>=0&&i+2<GameState.height&&j>0&&j<GameState.width){
                     if(i<3){
                         i--;
                     }

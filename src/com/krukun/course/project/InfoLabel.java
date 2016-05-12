@@ -24,12 +24,7 @@ public class InfoLabel implements CompositeInterface {
     public JComponent goToGame() {
         return label;
     }
-    public void setIcon(ImageIcon icon){
-        label.setIcon(icon);
-        label.setHorizontalAlignment(JLabel.CENTER);
-        Border border = LineBorder.createGrayLineBorder();
-        label.setBorder(border);
-    }
+
 
     @Override
     public String getPlace() {

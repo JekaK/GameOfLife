@@ -20,6 +20,18 @@ public class ButtonListenerFactory {
         if (name.equals("Randomize")) {
             return new RandomizeButtonListener();
         }
+        if(name.equals("LeftTop")){
+            return new LeftTopGliderListener();
+        }
+        if(name.equals("LeftDown")){
+            return new LeftDownGliderListener();
+        }
+        if(name.equals("RightTop")){
+            return new RightTopGliderListener();
+        }
+        if(name.equals("RightDown")){
+            return new RightDownGliderListener();
+        }
         return null;
     }
 }

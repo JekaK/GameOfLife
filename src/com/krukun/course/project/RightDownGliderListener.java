@@ -40,7 +40,7 @@ public class RightDownGliderListener implements ButtonListener,Observer {
 
                 int j = (GameState.width * (x - ((pressed.getComponent().getWidth() / 2))) / panel.getWidth());
                 int i = (GameState.height * (y - (pressed.getComponent().getHeight() / 2)) / panel.getHeight()) + 2;
-                if(i>=0&&j>=0&&j-1>0&&i-1>0){
+                if(i>=0&&j>=0&&j-1>0&&i-1>0&&i<GameState.height&&j<GameState.width){
                     if(i<3){
                         i--;
                     }

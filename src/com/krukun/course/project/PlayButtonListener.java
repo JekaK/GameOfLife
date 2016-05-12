@@ -33,7 +33,7 @@ public class PlayButtonListener implements ButtonListener, Observer {
                 if (play) {
                     button.setText("Pause");
                 } else button.setText("Play");
-                
+
                 originator.setCurrentMove(copy());
                 taker.add(originator.saveToMemento());
                 taker.setCurrent(taker.getListSize());

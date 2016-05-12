@@ -10,8 +10,10 @@ public class Game {
     private GameWindow window;
     private CompositePanel mainPanel;
     private GamePanel gamePanel;
-    private CompositeGameControlsPanel controlPanel;
-    private GameButton playButton, randomizeButton, resetButton;
+    private CompositeGameControlsPanel controlPanel, leftControlPanel;
+    private GameButton playButton, randomizeButton, resetButton, leftTop, leftDown, rightTop, rightDown, faq;
+    private InfoLabel leftTopLabel, leftDownLabel, rightTopLabel, rightDownLabel;
+    private GameLogic logic;
 
     public Game() {
         initUI();
@@ -42,33 +44,33 @@ public class Game {
         controlPanel.setPlace(BorderLayout.PAGE_END);
         mainPanel.add(controlPanel);
 
-        CompositeGameControlsPanel leftControlPanel = new CompositeGameControlsPanel(15, 1,150,10);
+        leftControlPanel = new CompositeGameControlsPanel(15, 1, 150, 10);
         leftControlPanel.add(new InfoLabel("Gliders: "));
 
-        GameButton leftTop = new GameButton();
+        leftTop = new GameButton();
         leftTop.setIcon(new ImageIcon("src\\com\\krukun\\course\\project\\gliders\\leftTop.GIF"));
         leftTop.setPlace(BorderLayout.CENTER);
-        leftTop.addListener(new LeftTopGliderListener());
+        leftTop.addListener(factory.getAdapter("LeftTop"));
 
-        GameButton leftDown = new GameButton();
+        leftDown = new GameButton();
         leftDown.setIcon(new ImageIcon("src\\com\\krukun\\course\\project\\gliders\\leftDown.GIF"));
         leftDown.setPlace(BorderLayout.CENTER);
-        leftDown.addListener(new LeftDownGliderListener());
+        leftDown.addListener(factory.getAdapter("LeftDown"));
 
-        GameButton rightTop = new GameButton();
+        rightTop = new GameButton();
         rightTop.setIcon(new ImageIcon("src\\com\\krukun\\course\\project\\gliders\\rightTop.GIF"));
         rightTop.setPlace(BorderLayout.CENTER);
-        rightTop.addListener(new RightTopGliderListener());
+        rightTop.addListener(factory.getAdapter("RightTop"));
 
-        GameButton rightDown = new GameButton();
+        rightDown = new GameButton();
         rightDown.setIcon(new ImageIcon("src\\com\\krukun\\course\\project\\gliders\\rightDown.GIF"));
         rightDown.setPlace(BorderLayout.CENTER);
-        rightDown.addListener(new RightDownGliderListener());
+        rightDown.addListener(factory.getAdapter("RightDown"));
 
-        InfoLabel leftTopLabel = new InfoLabel("Left-Top glider:");
-        InfoLabel leftDownLabel = new InfoLabel("Left-Down glider:");
-        InfoLabel rightTopLabel = new InfoLabel("Right-Top glider:");
-        InfoLabel rightDownLabel = new InfoLabel("Right-Down glider:");
+        leftTopLabel = new InfoLabel("Left-Top glider:");
+        leftDownLabel = new InfoLabel("Left-Down glider:");
+        rightTopLabel = new InfoLabel("Right-Top glider:");
+        rightDownLabel = new InfoLabel("Right-Down glider:");
 
         leftControlPanel.add(leftTopLabel);
         leftControlPanel.add(leftTop);
@@ -82,7 +84,7 @@ public class Game {
         leftControlPanel.add(rightDownLabel);
         leftControlPanel.add(rightDown);
 
-        GameButton faq = new GameButton("FAQ");
+        faq = new GameButton("FAQ");
         faq.addListener(new FAQButtonListener());
         leftControlPanel.add(faq);
 
@@ -91,7 +93,7 @@ public class Game {
 
         window.add(mainPanel.goToGame());
         window.addKeyListener(new MementoListener());
-        GameLogic logic = new GameLogic(gameState);
+        logic = new GameLogic(gameState);
         logic.startThinking();
     }
 
