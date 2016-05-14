@@ -8,7 +8,7 @@ import java.awt.geom.Line2D;
 /**
  * Created by Eugeniy Krukun on 02.05.2016.
  */
-public class ResetButtonListener implements ButtonListener,Observer {
+public class ResetButtonListener extends ButtonListener implements Observer {
     private GamePanel panel;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];

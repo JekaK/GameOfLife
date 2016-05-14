@@ -10,7 +10,8 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Game game = new Game();
+                GameConstructor gameConstructor = new GameConstructor();
+                gameConstructor.constructGame();
             }
         });
     }

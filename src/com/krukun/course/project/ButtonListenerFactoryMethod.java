@@ -5,33 +5,34 @@ import java.awt.event.MouseAdapter;
 /**
  * Created by Eugeniy Krukun on 04.05.2016.
  */
-public class ButtonListenerFactory {
+public class ButtonListenerFactoryMethod {
 
-    public ButtonListenerFactory() {
+    public ButtonListenerFactoryMethod() {
     }
 
     public ButtonListener getAdapter(String name) {
+        ButtonListener listener = null;
         if (name.equals("Play")) {
-            return new PlayButtonListener();
+            listener = new PlayButtonListener();
         }
         if (name.equals("Reset")) {
-            return new ResetButtonListener( );
+            listener = new ResetButtonListener( );
         }
         if (name.equals("Randomize")) {
-            return new RandomizeButtonListener();
+            listener = new RandomizeButtonListener();
         }
         if(name.equals("LeftTop")){
-            return new LeftTopGliderListener();
+            listener = new LeftTopGliderListener();
         }
         if(name.equals("LeftDown")){
-            return new LeftDownGliderListener();
+            listener = new LeftDownGliderListener();
         }
         if(name.equals("RightTop")){
-            return new RightTopGliderListener();
+            listener = new RightTopGliderListener();
         }
         if(name.equals("RightDown")){
-            return new RightDownGliderListener();
+            listener = new RightDownGliderListener();
         }
-        return null;
+        return listener ;
     }
 }

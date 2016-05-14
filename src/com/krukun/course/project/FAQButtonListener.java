@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by Eugeniy Krukun on 06.05.2016.
  */
-public class FAQButtonListener implements ButtonListener {
+public class FAQButtonListener extends ButtonListener {
 
     @Override
     public MouseListener getButtonAdapter() {

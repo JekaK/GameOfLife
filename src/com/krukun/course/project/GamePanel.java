@@ -81,10 +81,10 @@ public class GamePanel extends JPanel implements CompositeInterface {
     }
 
     public void initListeners() {
-        PanelListenerFactory factory = new PanelListenerFactory();
-        this.addComponentListener((ComponentListener) factory.getListenerForPanel("Component", state));
-        this.addMouseListener((MouseListener) factory.getListenerForPanel("Adapter", state));
-        this.addMouseMotionListener((MouseMotionListener) factory.getListenerForPanel("Motion", state));
+        PanelListenerFactoryMethod factory = new PanelListenerFactoryMethod();
+        this.addComponentListener((ComponentListener) factory.getListenerForPanel("Component", state).getListener());
+        this.addMouseListener((MouseListener) factory.getListenerForPanel("Adapter", state).getListener());
+        this.addMouseMotionListener((MouseMotionListener) factory.getListenerForPanel("Motion", state).getListener());
     }
 
     public Graphics getOffScrGraph() {

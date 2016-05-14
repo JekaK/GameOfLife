@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by Eugeniy Krukun on 03.05.2016.
  */
-public class RandomizeButtonListener implements ButtonListener,Observer {
+public class RandomizeButtonListener extends ButtonListener implements Observer {
     private GamePanel panel;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];

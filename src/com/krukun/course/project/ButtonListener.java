@@ -7,6 +7,6 @@ import java.awt.event.MouseListener;
 /**
  * Created by Eugeniy Krukun on 02.05.2016.
  */
-public interface ButtonListener {
-    public MouseListener getButtonAdapter();
+public abstract class ButtonListener {
+    public abstract MouseListener getButtonAdapter();
 }

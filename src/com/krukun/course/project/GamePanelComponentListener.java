@@ -8,7 +8,7 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class GamePanelComponentListener implements PanelListener {
+public class GamePanelComponentListener  extends PanelListener {
     private GamePanel panel;
     public GamePanelComponentListener() {
         panel = GamePanel.getInstance();

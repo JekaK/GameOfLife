@@ -7,7 +7,7 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class GamePanelMouseAdapter implements PanelListener,Observer {
+public class GamePanelMouseAdapter extends PanelListener implements Observer {
 
     private GamePanel panel;
     private boolean play;

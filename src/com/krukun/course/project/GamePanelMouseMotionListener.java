@@ -9,7 +9,7 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public class GamePanelMouseMotionListener implements PanelListener, Observer {
+public class GamePanelMouseMotionListener extends PanelListener implements  Observer {
     private GamePanel panel;
     private boolean play;
     private boolean[][] currentMove = new boolean[GameState.height][GameState.width], nextMove = new boolean[GameState.height][GameState.width];

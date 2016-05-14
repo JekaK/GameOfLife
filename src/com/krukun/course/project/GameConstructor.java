@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by Eugeniy Krukun on 30.04.2016.
  */
-public class Game {
+public class GameConstructor {
     private GameWindow window;
     private CompositePanel mainPanel;
     private GamePanel gamePanel;
@@ -15,11 +15,11 @@ public class Game {
     private InfoLabel leftTopLabel, leftDownLabel, rightTopLabel, rightDownLabel;
     private GameLogic logic;
 
-    public Game() {
-        initUI();
+    public GameConstructor() {
+
     }
 
-    public void initUI() {
+    public void constructGame() {
         final GameState gameState = new GameState();
         window = new GameWindow();
         mainPanel = new CompositePanel(new BorderLayout());
@@ -30,7 +30,7 @@ public class Game {
         randomizeButton = new GameButton("Randomize it!");
         resetButton = new GameButton("Reset");
 
-        ButtonListenerFactory factory = new ButtonListenerFactory();
+        ButtonListenerFactoryMethod factory = new ButtonListenerFactoryMethod();
         playButton.addListener(factory.getAdapter("Play"));
         resetButton.addListener(factory.getAdapter("Reset"));
         randomizeButton.addListener(factory.getAdapter("Randomize"));

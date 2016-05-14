@@ -6,6 +6,7 @@ import java.util.EventListener;
 /**
  * Created by Eugeniy Krukun on 01.05.2016.
  */
-public interface PanelListener {
-    public EventListener getListener();
+public abstract class PanelListener {
+
+    public abstract EventListener getListener();
 }

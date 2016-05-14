@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by Eugeniy Krukun on 11.05.2016.
  */
-public class RightDownGliderListener implements ButtonListener,Observer {
+public class RightDownGliderListener extends ButtonListener implements Observer {
     private GamePanel panel;
     private boolean play;
     private Point location;
